@@ -7,7 +7,7 @@ It all started when two low 20s students needed to track their spendings because
 
 ## Documentation
 
-[Instalation](.\CashTrack\Documentation\instalation.md)
+[Instalation](https://github.com/eusouorui/CashTrack/blob/develop/CashTrack/docmentation/instalation.md)
 
 
 
