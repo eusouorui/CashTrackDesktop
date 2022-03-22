@@ -1,2 +1,2 @@
 # CashTrack
-The app that tracks your cash for you
+The app that tracks your cash so you don't have to.
