@@ -5,5 +5,4 @@ It all started when two low 20s students needed to track their spendings because
 
 
 
-Produced by **André Machado** and **Rui Dias** on visual studio community which means **we have no copyright of any of this.** Pretty shitty if you ask me.
-
+Produced by **André Machado** and **Rui Dias** on visual studio community which means **we have no copyright of any of this.** Pretty shitty if you ask me!
