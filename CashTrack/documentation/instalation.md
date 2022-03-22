@@ -4,12 +4,14 @@
 
 ## Source Tree -  Git GUI
 
-[Download Source Tree](https://www.sourcetreeapp.com/)
+```
+<a href="https://www.sourcetreeapp.com/" target="_blank">Download Source Tree</a>
+```
 
 ### Clone Repository:
 
 ```english
-![Clone repository](.\CashTrack\imgs\installation\sourcetree\clone-button.png)
+![Clone repository](https://github.com/eusouorui/CashTrack/blob/develop/CashTrack/imgs/installation/sourcetree/clone-button.png)
 ```
 
 
