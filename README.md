@@ -1,7 +1,13 @@
 # **CashTrack**
 The app that tracks **your cash** so you don't have to.
 
-It all started when two low 20s students needed to track their spendings because they were pretty broke. This project's goal is to make you a saving expert by providing amazing, never seen, data and _hopefully_ a database at some point.
+It all started when two low 20s students needed to track their spendings because they were pretty broke. This project's goal is to make you a saving expert by providing amazing, never seen, data and *hopefully* a database at some point.
+
+
+
+## Documentation
+
+[Instalation](.\CashTrack\Documentation\instalation.md)
 
 
 
