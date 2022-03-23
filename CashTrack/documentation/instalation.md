@@ -18,7 +18,7 @@ Choose these paths and links. It is recomended that **your git folders are in yo
 
 Click **Git-flow** on the top right corner:
 
-![git-flow](https://github.com/eusouorui/CashTrack/blob/develop/CashTrack/imgs/installation/sourcetree/git-flow-click.png)
+![git-flow](https://github.com/eusouorui/CashTrack/blob/develop/CashTrack/imgs/installation/sourcetree/Git-Flow-click.png)
 
 Change **master** to **main** as shown and make sure development branch is develop. 
 
