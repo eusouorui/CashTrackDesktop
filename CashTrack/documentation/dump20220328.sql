@@ -1,15 +1,15 @@
-DROP DATABASE IF EXISTS cashtrackdb;
+DROP DATABASE IF EXISTS cashtrack_db;
 CREATE DATABASE  IF NOT EXISTS cashtrack_db;
 USE cashtrack_db;
 
 
 DROP TABLE IF EXISTS company;
 CREATE TABLE company (
-  id int(11) NOT NULL AUTO_INCREMENT,
+  id int(11) NOT NULL,
   isEnabled tinyint(4) NOT NULL,
   name varchar(255) NOT NULL,
   PRIMARY KEY (id)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS location;
 CREATE TABLE location (
@@ -43,7 +43,7 @@ CREATE TABLE transactioncategory (
   isEnabled tinyint(4) NOT NULL DEFAULT '1',
   description varchar(50) NOT NULL,
   PRIMARY KEY (id)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS transactiontype;
 CREATE TABLE transactiontype (
@@ -64,10 +64,6 @@ CREATE TABLE transaction (
   transactionDate datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   description varchar(255) DEFAULT NULL,
   PRIMARY KEY (id),
-  KEY fk_clientID (clientID),
-  KEY fk_transactionTypeID (transactionTypeId),
-  KEY fk_transactionCategory_idx (transactionCategoryID),
-  KEY fk_Company_idx (companyID),
   CONSTRAINT fk_CompanyID FOREIGN KEY (companyID) REFERENCES company (id),
   CONSTRAINT fk_clientID FOREIGN KEY (clientID) REFERENCES client (id),
   CONSTRAINT fk_transactionCategoryID FOREIGN KEY (transactionCategoryID) REFERENCES transactioncategory (id),
