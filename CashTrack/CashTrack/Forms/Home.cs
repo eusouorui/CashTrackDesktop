@@ -73,6 +73,41 @@ namespace CashTrack
                     return string.Empty;
             }
         }
+
+        private bool DonationMessageBox()
+        {
+            bool donationSuccessfull = false;
+
+            if (GetCurrencyName() == "Euro")
+            {
+                DialogResult dr = MessageBox.Show("Do you want to open teh creator's PayPal donation link?", "Paypal Donation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (dr == DialogResult.Yes)
+                {
+                    System.Diagnostics.Process.Start("https://www.paypal.com/paypalme/eusouorui");
+                    donationSuccessfull = true;
+                }
+                else
+                {
+                    dr = MessageBox.Show("The donation was canceled by you.", "We're sad to hear.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else
+            {
+                DialogResult dr = MessageBox.Show("Do you want to confirm your donation?", "Crypto Donation", MessageBoxButtons.YesNoCancel);
+                
+                if(dr == DialogResult.Yes)
+                {
+                    donationSuccessfull = true;
+                }
+                else
+                {
+                    donationSuccessfull = false;
+                }
+            }
+            return donationSuccessfull;
+        }
+
         #endregion
 
         #region Actions
@@ -86,16 +121,26 @@ namespace CashTrack
                 return;
             }
 
-            
-
             if (numericUpDownDonationAmount.Value <= 0)
             {
                 MessageBox.Show("Please select an amount for " + GetCurrencyName(), "No amount selected.", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
 
+            bool donationSuccessfull = DonationMessageBox();
+
+            
             textBoxDonationInfo.Text = string.Empty;
-            textBoxDonationInfo.Text = "Donated " + numericUpDownDonationAmount.Value.ToString() + " " + GetCurrencyName() + " to: " + Environment.NewLine + GetPaymentDestination();
+
+            if (donationSuccessfull)
+            {
+                textBoxDonationInfo.Text = "Donated " + numericUpDownDonationAmount.Value.ToString() + " " + GetCurrencyName() + " to: " + Environment.NewLine + GetPaymentDestination();
+            }
+            else
+            {
+                textBoxDonationInfo.Text = "Donation was not successful.";
+            }
+            
         }
 
         private void numericUpDownDonationAmount_ValueChanged(object sender, EventArgs e)
