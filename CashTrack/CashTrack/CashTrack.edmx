@@ -1,0 +1,418 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CashTrackDB.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="CashTrackDBStoreContainer">
+    <EntitySet Name="Clients" EntityType="CashTrackDB.Store.Clients" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Companies" EntityType="CashTrackDB.Store.Companies" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Locations" EntityType="CashTrackDB.Store.Locations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TransactionCategories" EntityType="CashTrackDB.Store.TransactionCategories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TransactionTypes" EntityType="CashTrackDB.Store.TransactionTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Transactions" EntityType="CashTrackDB.Store.Transactions" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="TransactionCategoryTransaction" Association="CashTrackDB.Store.TransactionCategoryTransaction">
+      <End Role="TransactionCategory" EntitySet="TransactionCategories" />
+      <End Role="Transaction" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="TransactionTypeTransaction" Association="CashTrackDB.Store.TransactionTypeTransaction">
+      <End Role="TransactionType" EntitySet="TransactionTypes" />
+      <End Role="Transaction" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="CompanyTransaction" Association="CashTrackDB.Store.CompanyTransaction">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Transaction" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="ClientTransaction" Association="CashTrackDB.Store.ClientTransaction">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="Transaction" EntitySet="Transactions" />
+    </AssociationSet>
+    <AssociationSet Name="ClientLocation" Association="CashTrackDB.Store.ClientLocation">
+      <End Role="Client" EntitySet="Clients" />
+      <End Role="Location" EntitySet="Locations" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Clients">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="isEnabled" Type="smallint" Nullable="false" />
+    <Property Name="firstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="lastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="birthDate" Type="datetime" Nullable="false" />
+    <Property Name="email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="createdAt" Type="time" Nullable="false" />
+    <Property Name="updateAt" Type="time" Nullable="false" />
+    <Property Name="locationID" Type="smallint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Companies">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="isEnabled" Type="smallint" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Locations">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="city" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="zipcode" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ClientID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TransactionCategories">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="isEnabled" Type="smallint" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TransactionTypes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="transactionType" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Transactions">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="isEnabled" Type="smallint" Nullable="false" />
+    <Property Name="value" Type="float" Nullable="false" />
+    <Property Name="transactionDate" Type="datetime" Nullable="false" />
+    <Property Name="description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="transactionCategoryID" Type="int" Nullable="false" />
+    <Property Name="transactionTypeID" Type="int" Nullable="false" />
+    <Property Name="companyID" Type="int" Nullable="false" />
+    <Property Name="clientID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="TransactionCategoryTransaction">
+    <End Role="TransactionCategory" Type="CashTrackDB.Store.TransactionCategories" Multiplicity="1" />
+    <End Role="Transaction" Type="CashTrackDB.Store.Transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TransactionCategory">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="transactionCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="TransactionTypeTransaction">
+    <End Role="TransactionType" Type="CashTrackDB.Store.TransactionTypes" Multiplicity="1" />
+    <End Role="Transaction" Type="CashTrackDB.Store.Transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TransactionType">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="transactionTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CompanyTransaction">
+    <End Role="Company" Type="CashTrackDB.Store.Companies" Multiplicity="1" />
+    <End Role="Transaction" Type="CashTrackDB.Store.Transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="companyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClientTransaction">
+    <End Role="Client" Type="CashTrackDB.Store.Clients" Multiplicity="1" />
+    <End Role="Transaction" Type="CashTrackDB.Store.Transactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="clientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ClientLocation">
+    <End Role="Client" Type="CashTrackDB.Store.Clients" Multiplicity="1" />
+    <End Role="Location" Type="CashTrackDB.Store.Locations" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Location">
+        <PropertyRef Name="ClientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="CashTrackDB" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="CashTrackDBContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clients" EntityType="CashTrackDB.Client" />
+          <EntitySet Name="Companies" EntityType="CashTrackDB.Company" />
+          <EntitySet Name="Locations" EntityType="CashTrackDB.Location" />
+          <EntitySet Name="TransactionCategories" EntityType="CashTrackDB.TransactionCategory" />
+          <EntitySet Name="TransactionTypes" EntityType="CashTrackDB.TransactionType" />
+          <EntitySet Name="Transactions" EntityType="CashTrackDB.Transaction" />
+          <AssociationSet Name="TransactionCategoryTransaction" Association="CashTrackDB.TransactionCategoryTransaction">
+            <End Role="TransactionCategory" EntitySet="TransactionCategories" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="TransactionTypeTransaction" Association="CashTrackDB.TransactionTypeTransaction">
+            <End Role="TransactionType" EntitySet="TransactionTypes" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="CompanyTransaction" Association="CashTrackDB.CompanyTransaction">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="ClientTransaction" Association="CashTrackDB.ClientTransaction">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="ClientLocation" Association="CashTrackDB.ClientLocation">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Location" EntitySet="Locations" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="isEnabled" Type="Int16" Nullable="false" />
+          <Property Name="firstName" Type="String" Nullable="false" />
+          <Property Name="lastName" Type="String" Nullable="false" />
+          <Property Name="birthDate" Type="DateTime" Nullable="false" />
+          <Property Name="email" Type="String" Nullable="false" />
+          <Property Name="password" Type="String" Nullable="false" />
+          <Property Name="createdAt" Type="Time" Nullable="false" />
+          <Property Name="updateAt" Type="Time" Nullable="false" />
+          <Property Name="locationID" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Transactions" Relationship="CashTrackDB.ClientTransaction" FromRole="Client" ToRole="Transaction" />
+          <NavigationProperty Name="Locations" Relationship="CashTrackDB.ClientLocation" FromRole="Client" ToRole="Location" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="isEnabled" Type="Int16" Nullable="false" />
+          <Property Name="name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Transactions" Relationship="CashTrackDB.CompanyTransaction" FromRole="Company" ToRole="Transaction" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="city" Type="String" Nullable="false" />
+          <Property Name="address" Type="String" Nullable="false" />
+          <Property Name="zipcode" Type="String" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="CashTrackDB.ClientLocation" FromRole="Location" ToRole="Client" />
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TransactionCategory">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="isEnabled" Type="Int16" Nullable="false" />
+          <Property Name="description" Type="String" Nullable="false" />
+          <NavigationProperty Name="Transactions" Relationship="CashTrackDB.TransactionCategoryTransaction" FromRole="TransactionCategory" ToRole="Transaction" />
+        </EntityType>
+        <EntityType Name="TransactionType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="transactionType" Type="String" Nullable="false" />
+          <NavigationProperty Name="Transactions" Relationship="CashTrackDB.TransactionTypeTransaction" FromRole="TransactionType" ToRole="Transaction" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="isEnabled" Type="Int16" Nullable="false" />
+          <Property Name="value" Type="Double" Nullable="false" />
+          <Property Name="transactionDate" Type="DateTime" Nullable="false" />
+          <Property Name="description" Type="String" Nullable="false" />
+          <NavigationProperty Name="TransactionCategory" Relationship="CashTrackDB.TransactionCategoryTransaction" FromRole="Transaction" ToRole="TransactionCategory" />
+          <Property Name="transactionCategoryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TransactionType" Relationship="CashTrackDB.TransactionTypeTransaction" FromRole="Transaction" ToRole="TransactionType" />
+          <Property Name="transactionTypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="CashTrackDB.CompanyTransaction" FromRole="Transaction" ToRole="Company" />
+          <Property Name="companyID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="CashTrackDB.ClientTransaction" FromRole="Transaction" ToRole="Client" />
+          <Property Name="clientID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="TransactionCategoryTransaction">
+          <End Type="CashTrackDB.TransactionCategory" Role="TransactionCategory" Multiplicity="1" />
+          <End Type="CashTrackDB.Transaction" Role="Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionCategory">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="transactionCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TransactionTypeTransaction">
+          <End Type="CashTrackDB.TransactionType" Role="TransactionType" Multiplicity="1" />
+          <End Type="CashTrackDB.Transaction" Role="Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionType">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="transactionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CompanyTransaction">
+          <End Type="CashTrackDB.Company" Role="Company" Multiplicity="1" />
+          <End Type="CashTrackDB.Transaction" Role="Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClientTransaction">
+          <End Type="CashTrackDB.Client" Role="Client" Multiplicity="1" />
+          <End Type="CashTrackDB.Transaction" Role="Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="clientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ClientLocation">
+          <End Type="CashTrackDB.Client" Role="Client" Multiplicity="1" />
+          <End Type="CashTrackDB.Location" Role="Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Location">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CashTrackDBStoreContainer" CdmEntityContainer="CashTrackDBContainer">
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="IsTypeOf(CashTrackDB.Client)">
+        <MappingFragment StoreEntitySet="Clients">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="isEnabled" ColumnName="isEnabled" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="birthDate" ColumnName="birthDate" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="createdAt" ColumnName="createdAt" />
+          <ScalarProperty Name="updateAt" ColumnName="updateAt" />
+          <ScalarProperty Name="locationID" ColumnName="locationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Companies">
+      <EntityTypeMapping TypeName="IsTypeOf(CashTrackDB.Company)">
+        <MappingFragment StoreEntitySet="Companies">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="isEnabled" ColumnName="isEnabled" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Locations">
+      <EntityTypeMapping TypeName="IsTypeOf(CashTrackDB.Location)">
+        <MappingFragment StoreEntitySet="Locations">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="zipcode" ColumnName="zipcode" />
+          <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionCategories">
+      <EntityTypeMapping TypeName="IsTypeOf(CashTrackDB.TransactionCategory)">
+        <MappingFragment StoreEntitySet="TransactionCategories">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="isEnabled" ColumnName="isEnabled" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(CashTrackDB.TransactionType)">
+        <MappingFragment StoreEntitySet="TransactionTypes">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="transactionType" ColumnName="transactionType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transactions">
+      <EntityTypeMapping TypeName="IsTypeOf(CashTrackDB.Transaction)">
+        <MappingFragment StoreEntitySet="Transactions">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="isEnabled" ColumnName="isEnabled" />
+          <ScalarProperty Name="value" ColumnName="value" />
+          <ScalarProperty Name="transactionDate" ColumnName="transactionDate" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="transactionCategoryID" ColumnName="transactionCategoryID" />
+          <ScalarProperty Name="transactionTypeID" ColumnName="transactionTypeID" />
+          <ScalarProperty Name="companyID" ColumnName="companyID" />
+          <ScalarProperty Name="clientID" ColumnName="clientID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
