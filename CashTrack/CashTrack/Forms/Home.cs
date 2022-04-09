@@ -14,6 +14,7 @@ namespace CashTrack
 {
     public partial class Home : MaterialForm
     {
+        CashTrackDBContainer cashTrackDBContainer = new CashTrackDBContainer();
 
         public Home()
         {
