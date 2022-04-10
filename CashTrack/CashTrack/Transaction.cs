@@ -24,7 +24,7 @@ namespace CashTrack
 
         public Transaction(double value, string description, int transactionCategoryID, int transactionTypeID, int companyID, int clientID)
         {
-            isEnabled = 0;
+            isEnabled = 1;
             this.value = value;
             transactionDate = DateTime.Now;
             this.description = description;

@@ -40,7 +40,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.materialButtonTest = new MaterialSkin.Controls.MaterialButton();
+            this.btnLogin = new MaterialSkin.Controls.MaterialButton();
+            this.btnSignUp = new MaterialSkin.Controls.MaterialButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTheme)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDonationAmount)).BeginInit();
             this.groupBoxDonation.SuspendLayout();
@@ -172,12 +173,52 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Currency";
             // 
+            // btnLogin
+            // 
+            this.btnLogin.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnLogin.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnLogin.Depth = 0;
+            this.btnLogin.HighEmphasis = true;
+            this.btnLogin.Icon = null;
+            this.btnLogin.Location = new System.Drawing.Point(12, 360);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnLogin.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnLogin.Size = new System.Drawing.Size(64, 36);
+            this.btnLogin.TabIndex = 8;
+            this.btnLogin.Text = "Login";
+            this.btnLogin.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnLogin.UseAccentColor = false;
+            this.btnLogin.UseVisualStyleBackColor = true;
+            // 
+            // btnSignUp
+            // 
+            this.btnSignUp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnSignUp.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnSignUp.Depth = 0;
+            this.btnSignUp.HighEmphasis = true;
+            this.btnSignUp.Icon = null;
+            this.btnSignUp.Location = new System.Drawing.Point(123, 360);
+            this.btnSignUp.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnSignUp.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnSignUp.Name = "btnSignUp";
+            this.btnSignUp.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnSignUp.Size = new System.Drawing.Size(77, 36);
+            this.btnSignUp.TabIndex = 9;
+            this.btnSignUp.Text = "Sign Up";
+            this.btnSignUp.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnSignUp.UseAccentColor = false;
+            this.btnSignUp.UseVisualStyleBackColor = true;
+            this.btnSignUp.Click += new System.EventHandler(this.btnSignUp_Click);
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.materialButtonTest);
+            this.ClientSize = new System.Drawing.Size(800, 584);
+            this.Controls.Add(this.btnSignUp);
+            this.Controls.Add(this.btnLogin);
             this.Controls.Add(this.groupBoxDonation);
             this.Controls.Add(this.pictureBoxTheme);
             this.Name = "Home";
@@ -205,7 +246,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private MaterialSkin.Controls.MaterialButton materialButtonTest;
+        private MaterialSkin.Controls.MaterialButton btnLogin;
+        private MaterialSkin.Controls.MaterialButton btnSignUp;
     }
 }
 

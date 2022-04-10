@@ -20,19 +20,20 @@ namespace CashTrack
         private string email;
         private string password;
         private DateTime createdAt;
-        private DateTime UpdatedAt;
+        private DateTime updatedAt;
+        private DateTime deletedAt;
         private int locationID;
 
         public Client(string firstName, string lastName, DateTime birthDate, string email, string password, int locationID)
         {
-            isEnabled = 0;
+            isEnabled = 1;
             this.firstName = firstName;
             this.lastName = lastName;
             this.birthDate = birthDate;
             this.email = email;
             this.password = password;
             createdAt = DateTime.Now;
-            UpdatedAt = DateTime.Now;
+            updatedAt = DateTime.Now;
             this.locationID = locationID;
         }
 

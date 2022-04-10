@@ -14,7 +14,6 @@ namespace CashTrack
 {
     public partial class Home : MaterialForm
     {
-        CashTrackDBContainer cashTrackDBContainer = new CashTrackDBContainer();
 
         public Home()
         {
@@ -154,6 +153,12 @@ namespace CashTrack
         private void comboBoxDonationCurrency_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxDonationResume.Text = numericUpDownDonationAmount.Value + " " + GetCurrencyName();
+        }
+
+        private void btnSignUp_Click(object sender, EventArgs e)
+        {
+            SignUp signUp = new SignUp();
+            signUp.Show();
         }
     }
 }

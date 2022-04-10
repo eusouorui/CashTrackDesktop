@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 04/01/2022 14:55:15
+-- Date Created: 04/10/2022 15:42:49
 -- Generated from EDMX file: C:\_GIT\CashTrack\CashTrack\CashTrack\CashTrack.edmx
 -- --------------------------------------------------
 
@@ -37,8 +37,7 @@ CREATE TABLE [dbo].[Clients] (
     [email] nvarchar(max)  NOT NULL,
     [password] nvarchar(max)  NOT NULL,
     [createdAt] time  NOT NULL,
-    [updateAt] time  NOT NULL,
-    [locationID] smallint  NOT NULL
+    [updateAt] time  NOT NULL
 );
 GO
 
@@ -55,8 +54,7 @@ CREATE TABLE [dbo].[Locations] (
     [id] int IDENTITY(1,1) NOT NULL,
     [city] nvarchar(max)  NOT NULL,
     [address] nvarchar(max)  NOT NULL,
-    [zipcode] nvarchar(max)  NOT NULL,
-    [ClientID] int  NOT NULL
+    [zipcode] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -86,6 +84,13 @@ CREATE TABLE [dbo].[Transactions] (
     [transactionTypeID] int  NOT NULL,
     [companyID] int  NOT NULL,
     [clientID] int  NOT NULL
+);
+GO
+
+-- Creating table 'ClientLocation'
+CREATE TABLE [dbo].[ClientLocation] (
+    [Clients_id] int  NOT NULL,
+    [Locations_id] int  NOT NULL
 );
 GO
 
@@ -127,6 +132,12 @@ GO
 ALTER TABLE [dbo].[Transactions]
 ADD CONSTRAINT [PK_Transactions]
     PRIMARY KEY CLUSTERED ([id] ASC);
+GO
+
+-- Creating primary key on [Clients_id], [Locations_id] in table 'ClientLocation'
+ALTER TABLE [dbo].[ClientLocation]
+ADD CONSTRAINT [PK_ClientLocation]
+    PRIMARY KEY CLUSTERED ([Clients_id], [Locations_id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -193,19 +204,28 @@ ON [dbo].[Transactions]
     ([clientID]);
 GO
 
--- Creating foreign key on [ClientID] in table 'Locations'
-ALTER TABLE [dbo].[Locations]
-ADD CONSTRAINT [FK_ClientLocation]
-    FOREIGN KEY ([ClientID])
+-- Creating foreign key on [Clients_id] in table 'ClientLocation'
+ALTER TABLE [dbo].[ClientLocation]
+ADD CONSTRAINT [FK_ClientLocation_Client]
+    FOREIGN KEY ([Clients_id])
     REFERENCES [dbo].[Clients]
         ([id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_ClientLocation'
-CREATE INDEX [IX_FK_ClientLocation]
-ON [dbo].[Locations]
-    ([ClientID]);
+-- Creating foreign key on [Locations_id] in table 'ClientLocation'
+ALTER TABLE [dbo].[ClientLocation]
+ADD CONSTRAINT [FK_ClientLocation_Location]
+    FOREIGN KEY ([Locations_id])
+    REFERENCES [dbo].[Locations]
+        ([id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_ClientLocation_Location'
+CREATE INDEX [IX_FK_ClientLocation_Location]
+ON [dbo].[ClientLocation]
+    ([Locations_id]);
 GO
 
 -- --------------------------------------------------

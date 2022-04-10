@@ -59,11 +59,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CashTrack.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CashTrack.Context.tt</DependentUpon>
-    </Compile>
     <Compile Include="CashTrack.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -80,11 +75,20 @@
     <Compile Include="Location.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Forms\SignUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SignUp.Designer.cs">
+      <DependentUpon>SignUp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Transaction.cs" />
     <Compile Include="TransactionCategory.cs" />
     <Compile Include="TransactionType.cs" />
     <EmbeddedResource Include="Forms\Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SignUp.resx">
+      <DependentUpon>SignUp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -123,14 +127,10 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CashTrack.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CashTrack.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="CashTrack.edmx.sql" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="CashTrack.edmx.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
